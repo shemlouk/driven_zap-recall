@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import cards from "../cards";
 
-export default function Footer() {
+export default function Footer({ level }) {
   return (
     <Container>
-      <p>0/8 CONCLUÍDOS</p>
+      <p>
+        {level}/{cards.length} CONCLUÍDOS
+      </p>
     </Container>
   );
 }
