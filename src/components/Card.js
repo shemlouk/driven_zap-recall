@@ -81,6 +81,11 @@ const StyledCard = styled.li`
   color: #333333;
   position: relative;
   flex-direction: ${({ status }) => status % 3 !== 0 && "column"};
+  transition: 0.3s;
+
+  :hover {
+    transform: scale(1.05);
+  }
 
   img {
     cursor: ${({ status }) => (status === 3 ? "help" : "pointer")};
