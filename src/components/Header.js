@@ -4,19 +4,27 @@ import logo from "../assets/img/logo.png";
 export default function Header() {
   return (
     <Container>
-      <img src={logo} />
-      <h1>ZapRecall</h1>
+      <a href=".">
+        <img src={logo} />
+        <h1>ZapRecall</h1>
+      </a>
     </Container>
   );
 }
 
 const Container = styled.header`
-  display: flex;
-  align-items: center;
   margin: 40px 0 50px 0;
 
   img {
     width: 52px;
+  }
+
+  a {
+    user-select: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
   }
 
   h1 {

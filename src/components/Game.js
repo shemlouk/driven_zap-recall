@@ -1,7 +1,7 @@
 import cards from "../cards.js";
 import Card from "./Card.js";
 
-export default function Game({ props }) {
+export default function Game(props) {
   return (
     <ul>
       {cards.map((c) => (

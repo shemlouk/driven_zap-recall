@@ -10,7 +10,7 @@ export default function MainPage() {
     <Container>
       <Header />
       <Game {...{ finishedQuestions, setFinishedQuestions }} />
-      <Footer level={finishedQuestions.length} />
+      <Footer progress={finishedQuestions.length} />
     </Container>
   );
 }

@@ -13,7 +13,13 @@ const info = [
   { id: 3, title: "Zap!", file: iconeCerto, color: "#2FBE34" },
 ];
 
-export default function Card({ id, question, answer }) {
+export default function Card({
+  id,
+  question,
+  answer,
+  finishedQuestions,
+  setFinishedQuestions,
+}) {
   const [status, setStatus] = useState(0);
   const [score, setScore] = useState(0);
 
@@ -24,11 +30,12 @@ export default function Card({ id, question, answer }) {
   function updateScore(num) {
     setScore(num);
     updateStatus();
+    setFinishedQuestions([...finishedQuestions, { id: id, score: num }]);
   }
 
   function selectText() {
     if (status % 3 === 0) return;
-    if (status % 3 === 1) return question;
+    if (status === 1) return question;
     return answer;
   }
 
@@ -54,6 +61,7 @@ export default function Card({ id, question, answer }) {
 }
 
 const StyledCard = styled.li`
+  user-select: none;
   width: 300px;
   height: auto;
   background-color: ${({ status }) => (status % 3 > 0 ? "#ffffd5" : "#ffffff")};
@@ -75,11 +83,12 @@ const StyledCard = styled.li`
   flex-direction: ${({ status }) => status % 3 !== 0 && "column"};
 
   img {
-    cursor: pointer;
+    cursor: ${({ status }) => (status === 3 ? "help" : "pointer")};
   }
 
   div {
-    display: ${({ status }) => (status !== 2 ? "none" : "flex")};
+    display: ${({ status }) => (status === 2 ? "flex" : "none")};
+    margin-top: 20px;
     width: 100%;
     justify-content: space-around;
   }
