@@ -1,12 +1,20 @@
 import styled from "styled-components";
 import cards from "../cards";
+import info from "../info.js";
 
-export default function Footer({ progress }) {
+export default function Footer({ finishedQuestions }) {
+  const progress = finishedQuestions.length;
+
   return (
-    <Container>
+    <Container progress={progress}>
       <p>
         {progress}/{cards.length} CONCLUÍDOS
       </p>
+      <div>
+        {finishedQuestions.map((f) => (
+          <img key={f.id} src={info[f.score].file} />
+        ))}
+      </div>
     </Container>
   );
 }
@@ -21,10 +29,18 @@ const Container = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   font-family: "Recursive";
   font-weight: 400;
   font-size: 18px;
   color: #333333;
-  padding: 10px;
+  padding: 10px 0px;
+
+  div {
+    display: ${({ progress }) => !progress && "none"};
+  }
+
+  img {
+    margin: 0px 3px;
+  }
 `;
