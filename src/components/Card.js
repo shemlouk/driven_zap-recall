@@ -31,7 +31,7 @@ export default function Card({
 
   return (
     <StyledCard data-test="flashcard" status={status}>
-      <CardText data-text="flashcard-text" {...{ status, score }}>
+      <CardText data-test="flashcard-text" {...{ status, score }}>
         {selectText()}
       </CardText>
       <SetaVirar
