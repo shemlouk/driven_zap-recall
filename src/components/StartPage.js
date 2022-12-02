@@ -6,7 +6,9 @@ export default function StartPage({ setGameStatus }) {
     <Container>
       <img src={logo} />
       <h1>ZapRecall</h1>
-      <button onClick={() => setGameStatus(true)}>Iniciar Recall!</button>
+      <button data-test="start-btn" onClick={() => setGameStatus(true)}>
+        Iniciar Recall!
+      </button>
     </Container>
   );
 }

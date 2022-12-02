@@ -23,8 +23,8 @@ export default function Footer({ finishedQuestions }) {
   const index = finishedQuestions.every((f) => f.score > 1) ? 1 : 0;
 
   return (
-    <Container>
-      <Message isGameFinished={isGameFinished}>
+    <Container data-test="footer">
+      <Message data-test="finish-text" isGameFinished={isGameFinished}>
         <div>
           <img src={messages[index].emoji} />
           <span>{messages[index].title}</span>
@@ -36,7 +36,11 @@ export default function Footer({ finishedQuestions }) {
       </p>
       <ScoresLine progress={progress}>
         {finishedQuestions.map((f) => (
-          <img key={f.id} src={info[f.score].file} />
+          <img
+            data-test={info[f.score].test + "-icon"}
+            key={f.id}
+            src={info[f.score].file}
+          />
         ))}
       </ScoresLine>
     </Container>

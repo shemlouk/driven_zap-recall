@@ -24,24 +24,36 @@ export default function Card({
   }
 
   function selectText() {
-    if (status % 3 === 0) return;
+    if (status % 3 === 0) return `Pergunta ${id}`;
     if (status === 1) return question;
     return answer;
   }
 
   return (
-    <StyledCard status={status}>
-      {selectText()}
-      <SetaVirar status={status} src={setaVirar} onClick={updateStatus} />
+    <StyledCard data-test="flashcard" status={status}>
+      <CardText data-text="flashcard-text" {...{ status, score }}>
+        {selectText()}
+      </CardText>
+      <SetaVirar
+        data-test="turn-btn"
+        status={status}
+        src={setaVirar}
+        onClick={updateStatus}
+      />
       <div>
         {info.slice(1).map((i) => (
-          <Option key={i.id} onClick={() => updateScore(i.id)} color={i.color}>
+          <Option
+            data-test={i.test + "-btn"}
+            key={i.id}
+            onClick={() => updateScore(i.id)}
+            color={i.color}
+          >
             {i.title}
           </Option>
         ))}
       </div>
-      <CardTitle {...{ status, score }}>Pergunta {id}</CardTitle>
       <Icons
+        data-test={status === 0 ? info[score].test : info[score].test + "-icon"}
         status={status}
         src={info[score].file}
         onClick={() => status === 0 && updateStatus()}
@@ -89,12 +101,10 @@ const StyledCard = styled.li`
   }
 `;
 
-const CardTitle = styled.p`
-  display: ${({ status }) => status % 3 !== 0 && "none"};
+const CardText = styled.p`
   font-family: "Recursive";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: ${({ status }) => status % 3 === 0 && "700"};
+  font-size: ${({ score }) => (score % 3 === 0 ? "16px" : "18px")};
   line-height: 19px;
   text-decoration: ${({ score }) => score !== 0 && "line-through"};
   color: ${({ score }) => info[score].color};
